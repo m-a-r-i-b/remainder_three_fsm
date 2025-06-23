@@ -21,7 +21,7 @@ class ModThreeFSM:
     
     Attributes:
         _fsm (FSM): The underlying generic FSM
-        state_to_remainder (Dict[str, int]): Mapping from FSM states to remainder values
+        _state_to_remainder (Dict[str, int]): Mapping from FSM states to remainder values
     """
     
     def __init__(self) -> None:
@@ -57,7 +57,7 @@ class ModThreeFSM:
             raise ModThreeFSMError(f"Failed to initialize ModThree FSM: {e}")
         
         # Mapping from final states to remainder values
-        self.state_to_remainder = {
+        self._state_to_remainder = {
             "S0": 0,
             "S1": 1, 
             "S2": 2
@@ -95,7 +95,7 @@ class ModThreeFSM:
         
         try:
             final_state = self._fsm.process(binary_string)
-            remainder = self.state_to_remainder[final_state]
+            remainder = self._state_to_remainder[final_state]
             
             logger.debug(f"Final state: {final_state}, Remainder: {remainder}")
             return remainder
